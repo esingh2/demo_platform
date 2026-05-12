@@ -32,3 +32,9 @@ move_and_collide(move_x, move_y, ground_object) // the one line that actually mo
 if (x < -20 || x> room_width + 20 || y> room_height + 20 || y < -200) {
 	room_restart(); // restart the room if object goes out of the boundaries
 }
+
+// GET KEY
+if place_meeting(x, y, obj_key) {
+	got_key = true;
+	room_goto_next();
+}

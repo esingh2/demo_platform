@@ -10,7 +10,7 @@ move_y = 0;            // vertical movement
 // STATE VARIABLES
 is_grounded = false;   // on ground?
 is_climbing = false;   // on ladder?
-
+got_key = false;  // got key?
 
 // OBJECT REFERENCES
 ground_object = obj_ground;  // A nickname for your ground object
