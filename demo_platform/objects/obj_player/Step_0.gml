@@ -5,7 +5,8 @@ var jump_pressed = keyboard_check_pressed(vk_space); // var makes this a local v
 
 // COLLISION CHECKS
 // Check if standing on the ground
-is_grounded = place_meeting(x, y+2, ground_object)
+is_grounded = place_meeting(x, y+2, ground_object);
+is_ceiling = place_meeting(x, y-2, ground_object);
 
 // Check if touching ladder
 is_climbing = place_meeting(x, y, ladder_object);
@@ -36,5 +37,23 @@ if (x < -20 || x> room_width + 20 || y> room_height + 20 || y < -200) {
 // GET KEY
 if place_meeting(x, y, obj_key) {
 	got_key = true;
-	room_goto_next();
+	// Destory key
+	var myinstance = instance_place(x, y, obj_key);
+	instance_destroy(myinstance)
+}
+// GOT TO NEXT ROOM IF GOT KEY
+// if (distance_to_object(obj_door) <=1) {
+//	if (got_key) {
+//		room_goto_next();
+//	}
+// }
+// AVOID STICKING TO THE BOTTOM OF PLATFORMS
+if (is_ceiling) { // if hitting ceiling (platform above), move back down
+	if (move_y < 0) {
+		move_y = 0;
+	}
+}
+// BLOCKER
+if place_meeting(x, y, obj_blocker) {
+	move_speed*= blocked_speed;
 }
